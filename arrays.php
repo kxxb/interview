@@ -11,7 +11,7 @@ $array = [
 ];
 
 
-var_dump(searchElements($array));
+var_dump(flipElements($array));
 
 /**
  * 1 выделить уникальные записи (убрать дубли) в отдельный массив.
@@ -121,3 +121,37 @@ function searchElements(array $array, string $searchKey = 'id', string $searchVa
 }
 
 
+
+
+
+/**
+ * 4. изменить в массиве значения и ключи (использовать name => id в качестве пары ключ => значение)
+ *
+ *  Если параметр $strict = true
+ *   тогда будет проверяться добавлен ли уже такой ключ в результирующий массив
+ *
+ *  Если параметр $strict = false
+ *   в результирующем массиве будет записано последнее значение, которое встретилось в исходном массиве
+ *
+ * @param   array  $array
+ * @param   bool   $strict
+ *
+ * @return array
+ */
+function flipElements(array $array, bool $strict = true):array
+{
+    $n = [];
+    $f = function ($item, $key) use (&$n, $strict) {
+        if ($strict){
+            if(!array_key_exists($item['name'], $n)) {
+                $n[$item['name']] = $item['id'];
+            }
+
+            } else {
+            $n[$item['name']] = $item['id'];
+        }
+
+    };
+    array_walk($array, $f);
+    return $n;
+}
