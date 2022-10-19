@@ -91,6 +91,9 @@ create table evaluations
 Привести функцию `handleObjects` в соответствие с принципом открытости-закрытости (**O: Open-Closed Principle**) `SOLID`.
 ### (код представлен в папке `architecture`, в файле `solid_o.php`)
 
+Решение
+https://github.com/kxxb/interview/commit/44d7530015e800070c5b3bb8a94cb4393c2c0ee2
+
 2. Устранить нарушения первого пункта принципа инверсии зависимостей (**D: Dependency Inversion Principle**) `SOLID`:
 	« 1. Модули верхних уровней не должны зависеть от модулей нижних уровней. Оба типа модулей должны зависеть от абстракций. »
 ### (код представлен в папке `architecture`, в файле `solid_d.php`).
