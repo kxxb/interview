@@ -2,18 +2,16 @@
 
 
 $array = [
-            ['id' => 1, 'date' => "12.01.2020", 'name' => "test1"],
-            ['id' => 2, 'date' => "02.05.2020", 'name' => "test2"],
-            ['id' => 4, 'date' => "08.03.2020", 'name' => "test4"],
-            ['id' => 1, 'date' => "22.01.2020", 'name' => "test1"],
-            ['id' => 2, 'date' => "11.11.2020", 'name' => "test4"],
-            ['id' => 3, 'date' => "06.06.2020", 'name' => "test3"]
-        ];
+    ['id' => 1, 'date' => "12.01.2020", 'name' => "test1"],
+    ['id' => 2, 'date' => "02.05.2020", 'name' => "test2"],
+    ['id' => 4, 'date' => "08.03.2020", 'name' => "test4"],
+    ['id' => 1, 'date' => "22.01.2020", 'name' => "test1"],
+    ['id' => 2, 'date' => "11.11.2020", 'name' => "test4"],
+    ['id' => 3, 'date' => "06.06.2020", 'name' => "test3"]
+];
 
 
-
-
-var_dump(sortMultiDimensional2($array));
+var_dump(searchElements($array));
 
 /**
  * 1 выделить уникальные записи (убрать дубли) в отдельный массив.
@@ -23,14 +21,14 @@ var_dump(sortMultiDimensional2($array));
  *
  * @return array
  */
-function uniqueElements(array $array):array
+function uniqueElements(array $array): array
 {
     $n = [];
-    $f = function($item, $key) use (&$n)
-    {
-        $n[$item['id']]=$item;
+    $f = function ($item, $key) use (&$n) {
+        $n[$item['id']] = $item;
     };
     array_walk($array, $f);
+
     return $n;
 }
 
@@ -45,26 +43,26 @@ function uniqueElements(array $array):array
  *
  * @return array
  */
-function sortMultiDimensional(array $array, string $sortKey = 'name'):array
+function sortMultiDimensional(array $array, string $sortKey = 'name'): array
 {
     $n = [];
-    $f = function($item, $key) use (&$n, $sortKey)
-    {
-        switch  ($sortKey){
+    $f = function ($item, $key) use (&$n, $sortKey) {
+        switch ($sortKey) {
             case 'id':
-                $n[$item[$sortKey]]=$item;
+                $n[$item[$sortKey]] = $item;
                 break;
             case 'date':
-                $n[strtotime($item[$sortKey])]=$item;
+                $n[strtotime($item[$sortKey])] = $item;
                 break;
             case 'name':
-                $n[$item[$sortKey]]=$item;
+                $n[$item[$sortKey]] = $item;
                 break;
         }
 
     };
     array_walk($array, $f);
     ksort($n);
+
     return $n;
 }
 
@@ -78,12 +76,11 @@ function sortMultiDimensional(array $array, string $sortKey = 'name'):array
  *
  * @return array
  */
-function sortMultiDimensional2(array $array, string $sortKey = 'id'):array
+function sortMultiDimensional2(array $array, string $sortKey = 'id'): array
 {
 
-    $f = function($a, $b) use ($sortKey)
-    {
-        switch  ($sortKey){
+    $f = function ($a, $b) use ($sortKey) {
+        switch ($sortKey) {
             case 'id':
                 return $a[$sortKey] <=> $b[$sortKey];
             case 'date':
@@ -95,10 +92,32 @@ function sortMultiDimensional2(array $array, string $sortKey = 'id'):array
         }
     };
     usort($array, $f);
-    return  $array;
+
+    return $array;
 }
 
+/**
+ * 3. вернуть из массива только элементы,
+ *    удовлетворяющие внешним условиям
+ *  (например элементы с определенным `id`)
+ *
+ * @param   array   $array
+ * @param   string  $searchKey
+ * @param   string  $searchValue
+ *
+ * @return array
+ */
+function searchElements(array $array, string $searchKey = 'id', string $searchValue = '1'): array
+{
+    $n = [];
+    $f = function ($item, $key) use (&$n, $searchKey, $searchValue) {
+        if ($item[$searchKey] == $searchValue){
+            $n[] = $item;
+        }
 
-
+    };
+    array_walk($array, $f);
+    return $n;
+}
 
 

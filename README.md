@@ -40,7 +40,8 @@ $array = [
  Решение https://github.com/kxxb/interview/commit/f3060b6967d274235d96b6d3cd0ef47a4b31140a?diff=unified
 
 2. отсортировать многомерный массив по ключу (любому)
- Решение https://github.com/kxxb/interview/commit/b341768ad046b8b10a61789dda30daf742d36bdd
+ 
+    Решение https://github.com/kxxb/interview/commit/b341768ad046b8b10a61789dda30daf742d36bdd
 
 
 3. вернуть из массива только элементы, удовлетворяющие внешним условиям (например элементы с определенным `id`)
