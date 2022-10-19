@@ -60,6 +60,8 @@ $array = [
 ]
 ```
 
+    Решение https://github.com/kxxb/interview/commit/d71a8c9ce6e9e2e9794eebc38cbd3e7a91e6b6ae
+
 5. В базе данных имеется таблица с товарами `goods` (id INTEGER, name TEXT), 
 таблица с тегами `tags` (id INTEGER, name TEXT) и таблица связи товаров и тегов 
 `goods_tags` (tag_id INTEGER, goods_id INTEGER, UNIQUE(tag_id, goods_id)).
