@@ -11,17 +11,9 @@ $array = [
         ];
 
 
-$array1 = [
-    ['id' => 1],
-    ['id' => 2],
-    ['id' => 4],
-    ['id' => 1],
-    ['id' => 2],
-    ['id' => 3]
-];
 
 
-var_dump(uniqueElements($array));
+var_dump(sortMultiDimensional2($array));
 
 /**
  * 1 выделить уникальные записи (убрать дубли) в отдельный массив.
@@ -42,6 +34,69 @@ function uniqueElements(array $array):array
     return $n;
 }
 
+
+/**
+ * 2. отсортировать многомерный массив по ключу (любому)
+ *
+ *  с удалением дублей
+ *
+ * @param   array   $array
+ * @param   string  $sortKey
+ *
+ * @return array
+ */
+function sortMultiDimensional(array $array, string $sortKey = 'name'):array
+{
+    $n = [];
+    $f = function($item, $key) use (&$n, $sortKey)
+    {
+        switch  ($sortKey){
+            case 'id':
+                $n[$item[$sortKey]]=$item;
+                break;
+            case 'date':
+                $n[strtotime($item[$sortKey])]=$item;
+                break;
+            case 'name':
+                $n[$item[$sortKey]]=$item;
+                break;
+        }
+
+    };
+    array_walk($array, $f);
+    ksort($n);
+    return $n;
+}
+
+
+/**
+ * 2. отсортировать многомерный массив по ключу (любому)
+ *  сортирует и не меняет состав массива
+ *
+ * @param   array   $array
+ * @param   string  $sortKey
+ *
+ * @return array
+ */
+function sortMultiDimensional2(array $array, string $sortKey = 'id'):array
+{
+
+    $f = function($a, $b) use ($sortKey)
+    {
+        switch  ($sortKey){
+            case 'id':
+                return $a[$sortKey] <=> $b[$sortKey];
+            case 'date':
+                return strtotime($a[$sortKey]) <=> strtotime($b[$sortKey]);
+            case 'name':
+                return strcmp($a[$sortKey], $b[$sortKey]);
+            default:
+                return strcmp($a[$sortKey], $b[$sortKey]);
+        }
+    };
+    usort($array, $f);
+    return  $array;
+}
 
 
 
