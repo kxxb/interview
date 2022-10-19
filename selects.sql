@@ -24,3 +24,30 @@ from (select good_id, count(tag_id) as c
       from goods_tags
       group by good_id) z left join goods g on z.good_id = g.id
 where z.c = (select count(*) from tags)
+
+
+--Выбрать без join-ов и подзапросов
+-- все департаменты,
+-- в которых есть мужчины, и все они (каждый)
+-- поставили высокую оценку (строго выше 5).
+
+
+/**
+  ПОКА НЕТ РЕШЕНИЯ
+
+  только 2 и 3 отделы
+ */
+with evaluations (respondent_id, department_id, gender, value) as (
+  values
+    (1, 1,  true, 4),
+    (2, 1, true, 6),
+    (3, 1, false, 6),
+    (4, 2, true, 7),
+    (5, 2, true, 8),
+    (6, 3, true, 7),
+    (7, 3, true, 8),
+    (7, 4, false, 8)
+)
+select  department_id   from evaluations
+where gender = true
+
