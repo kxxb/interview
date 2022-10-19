@@ -111,17 +111,15 @@ function searchElements(array $array, string $searchKey = 'id', string $searchVa
 {
     $n = [];
     $f = function ($item, $key) use (&$n, $searchKey, $searchValue) {
-        if ($item[$searchKey] == $searchValue){
+        if ($item[$searchKey] == $searchValue) {
             $n[] = $item;
         }
 
     };
     array_walk($array, $f);
+
     return $n;
 }
-
-
-
 
 
 /**
@@ -138,16 +136,15 @@ function searchElements(array $array, string $searchKey = 'id', string $searchVa
  *
  * @return array
  */
-function flipElements(array $array, bool $strict = true):array
+function flipElements(array $array, bool $strict = true): array
 {
     $n = [];
     $f = function ($item, $key) use (&$n, $strict) {
-        if ($strict){
-            if(!array_key_exists($item['name'], $n)) {
+        if ($strict) {
+            if (!array_key_exists($item['name'], $n)) {
                 $n[$item['name']] = $item['id'];
             }
-
-            } else {
+        } else {
             $n[$item['name']] = $item['id'];
         }
 
