@@ -10,7 +10,6 @@ $array = [
     ['id' => 3, 'date' => "06.06.2020", 'name' => "test3"]
 ];
 
-
 var_dump(flipElements($array));
 
 /**
@@ -66,6 +65,7 @@ function sortMultiDimensional(array $array, string $sortKey = 'name'): array
     return $n;
 }
 
+array_multisort(array_column($array, 'id'), SORT_ASC, SORT_REGULAR, $array);
 
 /**
  * 2. отсортировать многомерный массив по ключу (любому)
@@ -121,6 +121,11 @@ function searchElements(array $array, string $searchKey = 'id', string $searchVa
     return $n;
 }
 
+$array3 = array_filter($array, function ($value) {
+    return $value['id'] == 2;
+});
+
+
 
 /**
  * 4. изменить в массиве значения и ключи (использовать name => id в качестве пары ключ => значение)
@@ -152,3 +157,7 @@ function flipElements(array $array, bool $strict = true): array
     array_walk($array, $f);
     return $n;
 }
+
+
+$array1 = array_values(array_column($array, null, 'id'));
+
